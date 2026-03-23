@@ -195,7 +195,7 @@ public:
 		CountAllLetter(_Value);
 	}
 
-	static int CountChar(string S1, char C1 , bool MatchCase = true)
+	static int CountLetter(string S1, char C1 , bool MatchCase = true)
 	{
 		int Count = 0;
 		for (int i = 0; i < S1.length(); i++)
@@ -216,7 +216,7 @@ public:
 
 	int CountLetter(char C)
 	{
-		return CountChar(_Value,C);
+		return CountLetter(_Value,C);
 	}
 
 	static int CountWord(string S1)

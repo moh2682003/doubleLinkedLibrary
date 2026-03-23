@@ -3,7 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
-#include "clsString .h"
+#include "clsString.h"
 
 using namespace std;
 
@@ -127,7 +127,7 @@ public:
 
 	static short CountLetterFrequency(string S1, char C, bool MatchCase = true)
 	{
-		return clsString::CountChar(S1, C, MatchCase);
+		return clsString::CountLetter(S1, C, MatchCase);
 	}
 
 	static bool isPalindromeNumber(int Number)
@@ -154,10 +154,13 @@ public:
 		return rand() % (To - From + 1) + From;
 	}
 
-	enum enCharType { SmallLetter = 1, CaptialLetter = 2, SpicalCharcter = 3, Digit = 4, MixChar = 5 };
+	enum enCharType { SmallLetter = 1, CaptialLetter = 2, Digit = 3 ,SpicalCharcter = 4, MixChar = 5 };
 
 	static char RandomCharacters(enCharType C)
 	{
+
+		if (C == MixChar)
+			C = enCharType((RandomNumber(1, 3)));
 		switch (C)
 		{
 		case enCharType::SmallLetter:
@@ -168,8 +171,6 @@ public:
 			return char(RandomNumber(33, 47));
 		case enCharType::Digit:
 			return char(RandomNumber(48, 57));
-		case enCharType::MixChar:
-			return char(RandomNumber(33, 122));
 		default:
 			return C;
 		}
@@ -410,6 +411,60 @@ public:
 				Count++;
 		return Count;
 	}
+
+	static string ConvertNumberToText(long long  Number)
+	{
+		if (Number == 0)
+		{
+			return "";
+		}
+		if (Number >= 1 && Number <= 19)
+		{
+			string Arr[] = { "" , "One" , "Tow" , "Three" , "Four" , "Five" , "Six" , "Seven" , "Eight" , "Nine" , "Ten",
+			"Eleven", "Twelve" , "Thirteen" , "Fourteen" ,"Fifteen" , "Sixteen" , "Seventeen" , "Eighteen" , "Nineteen" };
+
+			return Arr[Number];
+		}
+		if (Number >= 20 && Number <= 99)
+		{
+			string Arr1[] = { "" , "" , "Twenty" , "Thirty" , "Forty" , "Fifty" , "Sixty" , "Seventy" , "Eighty", "Ninty" };
+			return Arr1[Number / 10] + " " + ConvertNumberToText(Number % 10);
+		}
+		if (Number >= 100 && Number <= 199)
+		{
+			return "OneHundred " + ConvertNumberToText(Number % 100);
+		}
+		if (Number >= 200 && Number <= 999)
+		{
+			return ConvertNumberToText(Number / 100) + "Hundred " + ConvertNumberToText(Number % 100);
+		}
+		if (Number >= 1000 && Number <= 1999)
+		{
+			return "OneThousand " + ConvertNumberToText(Number % 1000);
+		}
+		if (Number >= 2000 && Number <= 999999)
+		{
+			return ConvertNumberToText(Number / 1000) + "Thousands " + ConvertNumberToText(Number % 1000);
+		}
+		if (Number >= 1000000 && Number <= 1999999)
+		{
+			return "OneMillion " + ConvertNumberToText(Number % 1000000);
+		}
+		if (Number >= 2000000 && Number <= 999999999)
+		{
+			return ConvertNumberToText(Number / 1000000) + "Million " + ConvertNumberToText(Number % 1000000);
+		}
+		if (Number >= 1000000000 && Number <= 1999999999)
+		{
+			return "OneBillion" + ConvertNumberToText(Number % 1000000000);
+		}
+		if (Number >= 2000000000 && Number <= 999999999999)
+		{
+			return ConvertNumberToText(Number / 1000000000) + "Billion " + ConvertNumberToText(Number % 1000000000);
+		}
+
+	}
+
 
 };
 
